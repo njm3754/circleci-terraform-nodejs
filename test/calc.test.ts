@@ -1,17 +1,19 @@
-import { add, mul } from "../src/calc";
+import { product, sum } from "../src/calc";
 
-describe("test add function", () => {
-  it("should return 15 for add(10,5)", () => {
-    expect(add(10, 5)).toBe(15);
+describe("test sum function", () => {
+  it("should return 5 for 2 + 3", () => {
+    expect(sum(2, 3)).toEqual(5);
   });
-
-  it("should return 5 for add(2,3)", () => {
-    expect(add(2, 3)).toBe(5);
+  it("should return 5 for 10 + -50", () => {
+    expect(sum(10, -50)).toEqual(-40);
   });
 });
 
-describe("test mul function", () => {
-  it("should return 15 for mul(3,5)", () => {
-    expect(mul(3, 5)).toBe(15);
+describe("test product function", () => {
+  it("should return 25 for 5 * 5", () => {
+    expect(product(5, 5)).toEqual(25);
+  });
+  it("should return 100 for 20 * 5", () => {
+    expect(product(20, 5)).toEqual(100);
   });
 });
