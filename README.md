@@ -24,7 +24,7 @@ Steps
 
 We have a NodeJs-Jest project setup for deployment.
 
-The goal of this sub task is to run `npm install` and `npm test` commands within a job and verify the results in the Circle CI portal.
+The goal of this sub task is to run `npm install`, `npm build` and `npm test` commands within a job and verify the results in the Circle CI portal.
 
 The run should look something like this
 
@@ -45,4 +45,24 @@ So, next step will be to add the following workflow block on the top of the code
 
 ## 3 - Sequential Job Execution
 
+Next we will do a dummy deployment of our code. Please copy paste the sample deployment job under the `build-test` job.
+
+      deploy:
+        working_directory: ~/project
+        docker:
+          - image: circleci/node:8
+        steps:
+        - checkout
+        - run:
+          name: App Deployment
+          command: echo "SUCCESS - Deployment to Azure"
+
+By default the two jobs will run in parallel which means that the `build-test` will happen at the same time the `deploy` job is running.
+Therefore, we need to make sure that the deployment job waits for the successful completion of the `build-test` job and doesn't initiate if the `build-test` fails.
+
 ## 4 - Manual Approval Deployment
+
+In a real life scenario it would be ideal if you could verify if all the builds and tests are passing before Circle CI does deployment.
+So, that is why we need to add a manual approval button that waits for the user to click `Approve` before kicking in deployment.
+
+Follow this [documentation](https://circleci.com/docs/2.0/workflows/?utm_medium=SEM&utm_source=gnb&utm_campaign=SEM-gb-DSA-Eng-uscan&utm_content=&utm_term=dynamicSearch-&gclid=Cj0KCQjws-OEBhCkARIsAPhOkIZGYE3L0OMR6SumDhQCQ9xW_wxSnFd6uW-zuJ4ASC8NComBDWhKQdkaAsVrEALw_wcB) to create manual approval step to hold the deployment.
