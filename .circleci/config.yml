@@ -4,7 +4,8 @@ workflows:
   build-test-deploy:
     jobs:
       - build-test
-      
+      - deploy
+
 jobs:
   build-test:
     working_directory: ~/project
@@ -29,5 +30,11 @@ jobs:
     steps:
       - checkout
       - run:
-        name: App Deployment
-        command: echo "SUCCESS - Deployment to Azure"      
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Run build
+          command: npm build    
+      - run:
+          name: Run Tests
+          command: npm test
