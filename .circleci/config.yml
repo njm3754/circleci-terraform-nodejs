@@ -4,14 +4,7 @@ workflows:
   build-test-deploy:
     jobs:
       - build-test
-      - hold-build-test:
-          type: approval
-          requires:
-            - build-test
-      - deploy:           
-          requires:
-            - hold-build-test 
-
+      
 jobs:
   build-test:
     working_directory: ~/project
