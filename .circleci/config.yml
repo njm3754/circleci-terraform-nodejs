@@ -3,6 +3,13 @@ workflows:
   build_and_test:
     jobs:
       - build-test
+      - hold: 
+          type: approval
+          requires:
+            - build-test
+      - deploy
+          requires: 
+            - hold      
 jobs:
   build-test:
     working_directory: ~/project
@@ -19,3 +26,12 @@ jobs:
       - run:
           name: Run Tests
           command: npm test
+  deploy:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:8
+    steps:
+    - checkout
+    - run:
+      name: App Deployment
+      command: echo "SUCCESS - Deployment to Azure"      
