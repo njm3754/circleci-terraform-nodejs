@@ -1,5 +1,6 @@
 workflows:
   version: 2
+  
   build-test-deploy:
     jobs:
       - build-test
@@ -7,9 +8,10 @@ workflows:
           type: approval
           requires:
             - build-test
-      - deploy:           
+      - deploys:           
           requires:
             - hold-build-test 
+
 jobs:
   build-test:
     working_directory: ~/project
@@ -26,7 +28,7 @@ jobs:
       - run:
           name: Run Tests
           command: npm test
-  deploy:
+  deploys:
     working_directory: ~/project
     docker:
       - image: circleci/node:8
