@@ -8,7 +8,7 @@ workflows:
           type: approval
           requires:
             - build-test          
-      - deploy
+      - deploy:
           requires:
             - hold-deploy       
 
