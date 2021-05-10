@@ -4,7 +4,13 @@ workflows:
   build-test-deploy:
     jobs:
       - build-test
+      - hold-deploy:
+          type: approval
+          requires:
+            - build-test          
       - deploy
+          requires:
+            - hold-deploy       
 
 jobs:
   build-test:
@@ -30,11 +36,5 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Dependencies
-          command: npm install
-      - run:
-          name: Run build
-          command: npm build    
-      - run:
-          name: Run Tests
-          command: npm test
+          name: Deployment
+          command: echo "SUCCESS - App deployment completed"
