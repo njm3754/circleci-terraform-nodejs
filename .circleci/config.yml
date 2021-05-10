@@ -1,15 +1,15 @@
 workflows:
   version: 2
-  build_and_test:
+  build-test-deploy:
     jobs:
       - build-test
-      - hold: 
+      - hold-build-test:
           type: approval
           requires:
             - build-test
-      - deploy
-          requires: 
-            - hold      
+      - deploy:           
+          requires:
+            - hold-build-test 
 jobs:
   build-test:
     working_directory: ~/project
