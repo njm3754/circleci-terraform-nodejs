@@ -4,7 +4,7 @@ workflows:
     jobs:
       - build
 jobs:
-  build:
+  build-test:
     working_directory: ~/project
     docker:
       - image: circleci/node:8
