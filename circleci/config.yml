@@ -1,0 +1,22 @@
+orbs:
+  win: circleci/windows@2.2.0
+
+workflows:
+  version: 2
+
+  npm_build_test:
+    jobs:
+      - build
+jobs:
+  build:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: npm ci
+      - run:
+          name: Run Tests
+          command: npm test
