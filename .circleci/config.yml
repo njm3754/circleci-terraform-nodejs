@@ -28,6 +28,7 @@ jobs:
       - run:
           name: Run Tests
           command: npm test
+          
   deploys:
     working_directory: ~/project
     docker:
