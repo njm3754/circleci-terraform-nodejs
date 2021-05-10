@@ -25,4 +25,6 @@ jobs:
             - /home/circleci/.npm
       - run:
           name: Run Tests
-          command: npm run test
+          command: |
+            ls 
+            npm run test
